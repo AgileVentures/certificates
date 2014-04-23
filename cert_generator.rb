@@ -30,20 +30,16 @@ def write_to_cert(options = {})
   date = options.fetch(:date)
   
     File.delete(@output) if File.exist?(@output)
-    Prawn::Document.generate(@output, :page_size => "A4", :page_layout => :landscape, :left_margin => 0, :right_margin => 0, :top_margin =>7, :skip_encoding => true, ) do |pdf|
+    Prawn::Document.generate(@output, :page_size => "A4", :background => @bg_image, :background_scale => 0.2432, :page_layout => :landscape, :left_margin => 30, :right_margin => 40, :top_margin =>7, :skip_encoding => true, ) do |pdf|
       #pdf.start_new_page
-      pdf.image @bg_image, :scale => 0.2375, :position => :center
+      #pdf.image @bg_image, :scale => 0.2375, :position => :center
       #pdf.image @bg_image, :scale => 0.2300, :position => :center, :vposition => :center
-      pdf.move_up 350
+      pdf.move_down 230
       pdf.font "Helvetica"
-      pdf.text name.titleize, :size => 44, :style => :bold, :color => "F07F48", :indent_paragraphs => 47
+      pdf.text name.titleize, :size => 48, :style => :bold, :color => "F07F48", :indent_paragraphs => 7
       pdf.move_up 165
-      pdf.text "Issued at #{date}", :size => 14, :style => :normal, :color => "575756", align: :right,  :indent_paragraphs => 47
-      pdf.text_box("Lorem ipsum",
-        :at => [bounds.right - 100, bounds.top - 100],
-        :align => :left,
-        :height => 50,
-        :width => margin_box.width)
+      pdf.text "Issued at #{date}", :size => 14, :style => :normal, :color => "575756", align: :right
+
     end
 end
 
