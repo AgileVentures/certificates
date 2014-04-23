@@ -12,6 +12,8 @@ You can use this tool from `irb` or from the command line
 
 ##### Commandline
 `ruby -r "./cert_generator.rb" -e "write_to_cert(name: 'Sam Joseph', date: '16th March, 2014')"` <= `name:` & `date:` are optional but hey, you do want the certificate to belong to somebody right?
+
+To parse data from a csv file we need to place the file with student names in `data`-folder and call ``ruby -r "./generate.rb" -e "generate"`
 ##### IRB
 `load './cert_generator.rb'`
 
