@@ -4,9 +4,9 @@ AV certificates
 Generate course certificates from a csv file
 
 #### Dependencies
-gem 'colorize'
-gem 'prawn'
-gem 'titleize'
+* gem 'colorize'
+* gem 'prawn'
+* gem 'titleize'
 
 
 
