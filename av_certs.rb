@@ -7,7 +7,8 @@ require 'titleize'
 require 'active_support/inflector'
 require 'date'
 require 'digest'
-
+require 'sinatra/activerecord'
+require './certificate'
 
 @username = 'No Name'
 @bg_image = File.join(File.dirname(__FILE__), 'templates/AV102-certificate300.jpg')
@@ -19,7 +20,7 @@ def write_to_cert(options = {})
   name = options.fetch(:name)
   date = Date.parse(options.fetch(:date)) 
   output = "pdf/#{name}-#{date}.pdf"
-  
+  cert = Certificate.create(student_name: name, generated_at: date, course_name: "AV102", course_desc: "ESaaS: Managing Distributed Teams prepares you to be a Teaching Assistant (TA) for the Engineering Software as a Service CS169 MOOC.")
   File.delete(output) if File.exist?(output)
   Prawn::Document.generate("pdf/#{name}-#{date}.pdf",
                            :page_size => 'A4',
