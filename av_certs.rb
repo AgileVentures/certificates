@@ -41,6 +41,16 @@ def write_to_cert(options = {})
 end
 
 def send_mail(name, email, file)
+  Mail.defaults do
+    delivery_method :smtp, {
+        :address => 'smtp.gmail.com',
+        :port => '587',
+        :user_name => ENV['GMAIL_SMTP_USER'],
+        :password => ENV['GMAIL_SMTP_PASSWORD'],
+        :authentication => :plain,
+        :enable_starttls_auto => true
+    }
+  end
   mail = Mail.new do
     from     'AgileVentures <info@agileventures.org>'
     to       "#{name} <#{email}>"
@@ -48,8 +58,7 @@ def send_mail(name, email, file)
     body     File.read('data/body.txt')
     add_file :filename => file, :mime_type => 'application/x-pdf', :content => File.read(file)
   end
-  mail.delivery_method :smtp, address: 'send.one.com', port: 1025
-  #mail.deliver
+  mail.deliver
 end
 
 
