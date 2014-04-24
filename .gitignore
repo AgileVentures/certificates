@@ -37,3 +37,6 @@ build/
 .idea
 /.idea/
 
+# Ignore datafile
+/data/data.csv
+
