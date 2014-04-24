@@ -30,11 +30,12 @@ def write_to_cert(options = {})
                            :top_margin => 7,
                            :bottom_margin => 0,
                            :skip_encoding => true ) do |pdf|
-    pdf.move_down 230
-    pdf.font 'Helvetica'
-    pdf.text name.titleize, :size => 48, :style => :bold, :color => 'F07F48', :indent_paragraphs => 10
+    pdf.move_down 225
+    pdf.font 'templates/Gotham-Bold.ttf'
+    pdf.text name.titleize, :size => 48, :color => 'F07F48', :indent_paragraphs => 10
     pdf.move_up 165
-    pdf.text date.strftime('Issued on %A, %B %e, %Y'), :size => 14, :style => :normal, :color => '575756', align: :right
+    pdf.font 'templates/Gotham-Medium.ttf'
+    pdf.text date.strftime('Issued on %A, %B %e, %Y'), :size => 14, :color => '575756', align: :right
   end
   @output = output
 end
