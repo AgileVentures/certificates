@@ -1,4 +1,5 @@
 GEM
+  remote: https://rubygems.org/
   specs:
     colorize (0.7.2)
     pdf-core (0.2.5)
