@@ -7,11 +7,8 @@ Generate course certificates from a csv file
 gem 'colorize'
 gem 'prawn'
 gem 'titleize'
-<<<<<<< Local Changes
-gem 'colorize'
-=======
-gem 'mail'
->>>>>>> External Changes
+
+
 
 #### Usage
 You can use this tool from `irb` or from the command line
