@@ -21,7 +21,10 @@ def write_to_cert(options = {})
   date = Date.parse(options.fetch(:date)) 
   output = "pdf/#{name}-#{date}.pdf"
   Certificate.where(student_name: name).destroy_all
-  cert = Certificate.create(student_name: name, generated_at: date, course_name: "AV102 ESaaS: Managing Distributed Teams", course_desc: "AV102 prepares you to be a Teaching Assistant (TA) for the Engineering Software as a Service CS169 MOOC.")
+  cert = Certificate.create(student_name: name,
+                            generated_at: date,
+                            course_name: 'AV102 ESaaS: Managing Distributed Teams',
+                            course_desc: 'AV102 prepares you to be a Teaching Assistant (TA) for the Engineering Software as a Service CS169 MOOC.')
   File.delete(output) if File.exist?(output)
   Prawn::Document.generate("pdf/#{name}-#{date}.pdf",
                            :page_size => 'A4',
@@ -66,9 +69,6 @@ def send_mail(name, email, file)
   mail.deliver
 end
 
-def generate_hash(student)
-  Digest::SHA256.hexdigest student
-end
 
 
 
