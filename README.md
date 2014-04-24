@@ -5,7 +5,7 @@ AV Course Certificates
 [about-us]: http://www.agileventures.org/about-us
 [members]: http://www.agileventures.org/users/index
 
-Generate course certificates from a csv file
+**Generate AgileVentures/ESaaS/edge.edX course certificates** 
 
 ## Dependencies
 * gem 'colorize'
