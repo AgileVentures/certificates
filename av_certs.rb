@@ -48,12 +48,12 @@ end
 def send_mail(name, email, file)
   Mail.defaults do
     delivery_method :smtp, {
-        :address => 'smtp.gmail.com',
+        :address => 'smtp.sendgrid.net',
         :port => '587',
-        :user_name => ENV['GMAIL_SMTP_USER'],
-        :password => ENV['GMAIL_SMTP_PASSWORD'],
-        :authentication => :plain,
-        :enable_starttls_auto => true
+        :domain => 'heroku.com',
+        :user_name => ENV['SENDGRID_USERNAME'],
+        :password => ENV['SENDGRID_PASSWORD'],
+        :authentication => :plain
     }
   end
   mail = Mail.new do
@@ -63,7 +63,7 @@ def send_mail(name, email, file)
     body     File.read('data/body.txt')
     add_file :filename => file, :mime_type => 'application/x-pdf', :content => File.read(file)
   end
- # mail.deliver
+  mail.deliver
 end
 
 def generate_hash(student)
