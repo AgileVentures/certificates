@@ -26,7 +26,7 @@ To parse data from a csv file we need to place the file with student names in `d
 
 `write_to_cert` or `write_to_cert(name: 'Your Name')` or `write_to_cert(name: 'Your Name', date: '2014-01-01') # or any other dateformat you choose`
 
-## <a name="contributing"></a>Contributing
+## Contributing
 In the spirit of [open source software][oo-sw], **everyone** is encouraged to help
 improve this project.
 
