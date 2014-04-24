@@ -47,11 +47,8 @@ def send_mail(name, email, file)
     body     File.read('data/body.txt')
     add_file :filename => file, :mime_type => 'application/x-pdf', :content => File.read(file)
   end
-  #mail.attachments[file] = { :mime_type => 'application/x-pdf', :content => File.read(file) }
-  #mail.delivery_method :sendmail
   mail.delivery_method :smtp, address: 'send.one.com', port: 1025
   #mail.deliver
-  puts mail
 end
 
 
