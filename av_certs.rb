@@ -36,6 +36,21 @@ def write_to_cert(options = {})
     pdf.move_up 165
     pdf.text date.strftime('Issued on %A, %B %e, %Y'), :size => 14, :style => :normal, :color => '575756', align: :right
   end
+  @output = output
+end
+
+def send_mail(name, email, file)
+  mail = Mail.new do
+    from     'AgileVentures <info@agileventures.org>'
+    to       "#{name} <#{email}>"
+    subject  'AV-102 Certificate'
+    body     File.read('data/body.txt')
+    add_file :filename => file, :content => File.read(file)
+  end
+
+  #mail.delivery_method :sendmail
+
+  #mail.deliver
 end
 
 
