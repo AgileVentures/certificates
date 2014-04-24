@@ -16,7 +16,7 @@ def generate
     students = row.to_hash
     email = students['email']
     if (students['grade'].to_i) >= 0.89
-      write_to_cert(name: (students['name'])) 
+      write_to_cert(name: (students['name']))
       puts 'Generated certificate for:'.bold + students['name'].bold.green
       if email.nil?
         puts 'No email for '.bold.red + students['name'].bold.green + ' present!'.bold.red

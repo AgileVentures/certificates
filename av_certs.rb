@@ -6,6 +6,7 @@ require 'prawn'
 require 'titleize'
 require 'active_support/inflector'
 require 'date'
+require 'digest'
 
 
 @username = 'No Name'
@@ -58,8 +59,16 @@ def send_mail(name, email, file)
     body     File.read('data/body.txt')
     add_file :filename => file, :mime_type => 'application/x-pdf', :content => File.read(file)
   end
-  mail.deliver
+ # mail.deliver
 end
+
+def generate_hash(student)
+  Digest::SHA256.hexdigest student
+end
+
+
+
+
 
 
 
