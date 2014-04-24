@@ -18,7 +18,7 @@ Generate course certificates from a csv file
 You can use this tool from `irb` or from the command line. `Mail` needs to be configured with your smtp server and credentials.
 
 #### Command line
-`ruby -r "./av_cert.rb" -e "write_to_cert(name: 'YOUR NAME', date: '16th March, 2014')"` <= `name:` & `date:` are optional but hey, you do want the certificate to belong to somebody right?
+`ruby -r "./av_certs.rb" -e "write_to_cert(name: 'YOUR NAME', date: '16th March, 2014')"` <= `name:` & `date:` are optional but hey, you do want the certificate to belong to somebody right?
 
 To parse data from a csv file we need to place the file with student names in `data`-folder and call `ruby -r "./generate.rb" -e "generate"`
 ##### IRB
