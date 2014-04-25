@@ -44,13 +44,13 @@ end
 def send_mail(name, email, file)
   Mail.defaults do
     delivery_method :smtp, {
-        :address => 'smtp.gmail.com',
-        :port => '587',
-        :user_name => ENV['GMAIL_SMTP_USER'],
-        :password => ENV['GMAIL_SMTP_PASSWORD'],
-        :authentication => :plain,
-        :enable_starttls_auto => true
-    }
+            :address => 'smtp.sendgrid.net',
+            :port => '587',
+            :domain => 'heroku.com',
+            :user_name => ENV['SENDGRID_USERNAME'],
+            :password => ENV['SENDGRID_PASSWORD'],
+            :authentication => :plain
+        }
   end
   mail = Mail.new do
     from     'AgileVentures <info@agileventures.org>'
