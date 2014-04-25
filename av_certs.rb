@@ -66,9 +66,7 @@ def send_mail(name, email, file)
   mail.deliver
 end
 
-def generate_hash(student)
-  Digest::SHA256.hexdigest student
-end
+
 
 
 

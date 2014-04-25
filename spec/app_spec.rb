@@ -1,13 +1,11 @@
-require File.expand_path '../../app.rb', __FILE__
-require 'spec_helper.rb' 
+require_relative '../app.rb' 
+require 'spec_helper'
 
 describe 'GET /' do	
 	it "should load the home page" do
-    #get '/'
-    debugger 
     visit '/'
-    page.should have_css('h1.title', text: "Agile Ventures")
-	  page.should have_content("Certificate validation")
+    page.should have_selector('h1', text: "AgileVentures")
+	  page.should have_selector('h2', text: "Certificate validation")
 	end
 end
 
