@@ -1,0 +1,18 @@
+development: &dev
+  adapter: postgresql
+  encoding: unicode
+  database: certiicates_development
+  pool: 5
+  username: postgres
+  password:
+
+test: &test
+  <<: *dev
+  database: certificates_test
+
+production:
+  <<: *dev
+  database: certificates_production
+
+cucumber:
+  <<: *test

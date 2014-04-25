@@ -7,7 +7,8 @@ require 'titleize'
 require 'active_support/inflector'
 require 'date'
 require 'digest'
-
+require 'sinatra/activerecord'
+require './certificate'
 
 @username = 'No Name'
 @bg_image = File.join(File.dirname(__FILE__), 'templates/AV102-certificate300.jpg')
@@ -19,7 +20,11 @@ def write_to_cert(options = {})
   name = options.fetch(:name)
   date = Date.parse(options.fetch(:date)) 
   output = "pdf/#{name}-#{date}.pdf"
-  
+  Certificate.where(student_name: name).destroy_all
+  cert = Certificate.create(student_name: name,
+                            generated_at: date,
+                            course_name: 'AV102 ESaaS: Managing Distributed Teams',
+                            course_desc: 'AV102 prepares you to be a Teaching Assistant (TA) for the Engineering Software as a Service CS169 MOOC.')
   File.delete(output) if File.exist?(output)
   Prawn::Document.generate("pdf/#{name}-#{date}.pdf",
                            :page_size => 'A4',
@@ -37,6 +42,8 @@ def write_to_cert(options = {})
     pdf.move_up 165
     pdf.font 'templates/Gotham-Medium.ttf'
     pdf.text date.strftime('Issued on %A, %B %e, %Y'), :size => 14, :color => '575756', align: :right
+    pdf.move_down 425
+    pdf.text "To verify the authenticity of this certificate, please visit: http://agileventures.org/verify/#{cert.identifier}", :size => 9, :color => '575756', align: :center
   end
   @output = output
 end
@@ -44,12 +51,12 @@ end
 def send_mail(name, email, file)
   Mail.defaults do
     delivery_method :smtp, {
-        :address => 'smtp.gmail.com',
+        :address => 'smtp.sendgrid.net',
         :port => '587',
-        :user_name => ENV['GMAIL_SMTP_USER'],
-        :password => ENV['GMAIL_SMTP_PASSWORD'],
-        :authentication => :plain,
-        :enable_starttls_auto => true
+        :domain => 'heroku.com',
+        :user_name => ENV['SENDGRID_USERNAME'],
+        :password => ENV['SENDGRID_PASSWORD'],
+        :authentication => :plain
     }
   end
   mail = Mail.new do
@@ -59,12 +66,9 @@ def send_mail(name, email, file)
     body     File.read('data/body.txt')
     add_file :filename => file, :mime_type => 'application/x-pdf', :content => File.read(file)
   end
- # mail.deliver
+  mail.deliver
 end
 
-def generate_hash(student)
-  Digest::SHA256.hexdigest student
-end
 
 
 

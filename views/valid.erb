@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Valid Certificate Number</title>
+ <link rel="stylesheet" href="/styles/base.css">
+</head>
+<body>
+  <header>
+    <h1>AgileVentures</h1>
+  </header>
+
+  <section>
+    <header class="valid">
+      <h1>This is a valid edge.edX.org certificate number for <span><%= @cert.student_name %></span></h1>
+    </header>
+
+    <section>
+      <dl>
+        <dt>Student Name</dt>
+        <dd><%= @cert.student_name %></dd>
+        <dt>Identifier number</dt>
+        <dd><%= @cert.identifier %></dd>
+        <dt>Course</dt>
+        <dd><%= @cert.course_name %></dd>
+        <dd class="description"><%= @cert.course_desc %></dd>
+      </dl>
+    </section>
+
+  </section>
+</body>
+</html>
+
