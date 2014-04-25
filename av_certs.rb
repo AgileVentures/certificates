@@ -69,6 +69,10 @@ def send_mail(name, email, file)
   mail.deliver
 end
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 640fdb24af1d3ccb124ae475c1e01ae89bedafef
 
 
 
