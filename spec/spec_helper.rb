@@ -1,3 +1,5 @@
+require 'sinatra'
+require 'rspec'
 require 'capybara' 
 require 'rack/test'
 include Rack::Test::Methods
@@ -6,7 +8,7 @@ Capybara.default_driver = :selenium
 Capybara.javascript_driver = :webkit
 
 def app
-  Sinatra::Application 
+  Capybara.app = Sinatra::Application
 end
 
 set :environment, :test 

@@ -13,6 +13,9 @@ gem 'prawn'
 gem 'titleize'
 gem 'mail'
 
+group :development, :test do
+  gem 'debugger'
+end
 
 group :test do
   gem 'rack-test'
