@@ -7,6 +7,8 @@ require 'titleize'
 require 'active_support/inflector'
 require 'date'
 require 'digest'
+require 'sinatra/activerecord'
+require './certificate'
 
 
 @username = 'No Name'
