@@ -59,7 +59,7 @@ def send_mail(name, email, file)
     body     File.read('data/body.txt')
     add_file :filename => file, :mime_type => 'application/x-pdf', :content => File.read(file)
   end
- # mail.deliver
+ mail.deliver
 end
 
 
