@@ -18,7 +18,7 @@ require './certificate'
 
 
 def write_to_cert(options = {})
-  defaults = {name: @username, date: Date.today.to_s, course_name: @course_name, course_desc: @course_desc }
+  defaults = { name: @username, date: Date.today.to_s, course_name: @course_name, course_desc: @course_desc }
   options = defaults.merge(options)
   name = options.fetch(:name)
   date = Date.parse(options.fetch(:date)) 
@@ -36,7 +36,7 @@ def write_to_cert(options = {})
                            right_margin: 40,
                            top_margin: 7,
                            bottom_margin: 0,
-                           skip_encoding: true ) do |pdf|
+                           skip_encoding: true) do |pdf|
     pdf.move_down 225
     pdf.font 'templates/Gotham-Bold.ttf'
     pdf.text name.titleize, size: 48, color: 'F07F48', indent_paragraphs: 10
@@ -44,7 +44,7 @@ def write_to_cert(options = {})
     pdf.font 'templates/Gotham-Medium.ttf'
     pdf.text date.strftime('Issued on %A, %B %e, %Y'), size: 14, color: '575756', align: :right
     pdf.move_down 425
-    pdf.text "To verify the authenticity of this certificate, please visit: http://agileventures.org/verify/#{@cert.identifier}", :size => 9, :color => '575756', align: :center
+    pdf.text "To verify the authenticity of this certificate, please visit: http://agileventures.org/verify/#{@cert.identifier}", size: 9, color: '575756', align: :center
   end
   @output = output
 end
