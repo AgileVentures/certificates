@@ -28,19 +28,19 @@ def write_to_cert(options = {})
   Certificate.where(student_name: name).destroy_all
   cert = Certificate.create(student_name: name,
                             generated_at: date,
-                            course_name: @course_name,
-                            course_desc: @course_desc)
+                            course_name: course_name,
+                            course_desc: course_desc)
   File.delete(output) if File.exist?(output)
   Prawn::Document.generate("pdf/#{name}-#{date}.pdf",
-                           :page_size => 'A4',
-                           :background => @bg_image,
-                           :background_scale => 0.2431,
-                           :page_layout => :landscape,
-                           :left_margin => 30,
-                           :right_margin => 40,
-                           :top_margin => 7,
-                           :bottom_margin => 0,
-                           :skip_encoding => true ) do |pdf|
+                           page_size: 'A4',
+                           background: @bg_image,
+                           background_scale: 0.2431,
+                           page_layout: :landscape,
+                           left_margin: 30,
+                           right_margin: 40,
+                           top_margin: 7,
+                           bottom_margin: 0,
+                           skip_encoding: true ) do |pdf|
     pdf.move_down 225
     pdf.font 'templates/Gotham-Bold.ttf'
     pdf.text name.titleize, :size => 48, :color => 'F07F48', :indent_paragraphs => 10
