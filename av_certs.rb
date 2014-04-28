@@ -25,11 +25,7 @@ def write_to_cert(options = {})
   course_name = options.fetch(:course_name)
   course_desc = options.fetch(:course_desc)
   output = "pdf/#{name}-#{date}.pdf"
-  Certificate.where(student_name: name).destroy_all
-  cert = Certificate.create(student_name: name,
-                            generated_at: date,
-                            course_name: course_name,
-                            course_desc: course_desc)
+  save_certificate(name, date, course_name, course_desc)
   File.delete(output) if File.exist?(output)
   Prawn::Document.generate("pdf/#{name}-#{date}.pdf",
                            page_size: 'A4',
@@ -43,12 +39,12 @@ def write_to_cert(options = {})
                            skip_encoding: true ) do |pdf|
     pdf.move_down 225
     pdf.font 'templates/Gotham-Bold.ttf'
-    pdf.text name.titleize, :size => 48, :color => 'F07F48', :indent_paragraphs => 10
+    pdf.text name.titleize, size: 48, color: 'F07F48', indent_paragraphs: 10
     pdf.move_up 165
     pdf.font 'templates/Gotham-Medium.ttf'
-    pdf.text date.strftime('Issued on %A, %B %e, %Y'), :size => 14, :color => '575756', align: :right
+    pdf.text date.strftime('Issued on %A, %B %e, %Y'), size: 14, color: '575756', align: :right
     pdf.move_down 425
-    pdf.text "To verify the authenticity of this certificate, please visit: http://agileventures.org/verify/#{cert.identifier}", :size => 9, :color => '575756', align: :center
+    pdf.text "To verify the authenticity of this certificate, please visit: http://agileventures.org/verify/#{@cert.identifier}", :size => 9, :color => '575756', align: :center
   end
   @output = output
 end
@@ -56,12 +52,12 @@ end
 def send_mail(name, email, file)
   Mail.defaults do
     delivery_method :smtp, {
-            :address => 'smtp.sendgrid.net',
-            :port => '587',
-            :domain => 'heroku.com',
-            :user_name => ENV['SENDGRID_USERNAME'],
-            :password => ENV['SENDGRID_PASSWORD'],
-            :authentication => :plain
+            address: 'smtp.sendgrid.net',
+            port: '587',
+            domain: 'heroku.com',
+            user_name: ENV['SENDGRID_USERNAME'],
+            password: ENV['SENDGRID_PASSWORD'],
+            authentication: :plain
         }
   end
   mail = Mail.new do
@@ -69,10 +65,20 @@ def send_mail(name, email, file)
     to       "#{name} <#{email}>"
     subject  'AV-102 Certificate'
     body     File.read('data/body.txt')
-    add_file :filename => file, :mime_type => 'application/x-pdf', :content => File.read(file)
+    add_file filename: file, mime_type: 'application/x-pdf', content: File.read(file)
   end
  #mail.deliver
 end
+
+def save_certificate(name, date, course_name, course_desc)
+  Certificate.where(student_name: name).destroy_all
+  @cert = Certificate.create(student_name: name,
+                            generated_at: date,
+                            course_name: course_name,
+                            course_desc: course_desc)
+
+end
+
 
 
 
