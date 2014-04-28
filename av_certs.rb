@@ -13,19 +13,23 @@ require './certificate'
 
 @username = 'No Name'
 @bg_image = File.join(File.dirname(__FILE__), 'templates/AV102-certificate300.jpg')
+@course_name = 'AV102 ESaaS: Managing Distributed Teams'
+@course_desc = 'AV102 prepares you to be a Teaching Assistant (TA) for the Engineering Software as a Service CS169 MOOC.'
 
 
 def write_to_cert(options = {})
-  defaults = {:name => @username, :date => Date.today.to_s}
+  defaults = {name: @username, date: Date.today.to_s, course_name: @course_name, course_desc: @course_desc }
   options = defaults.merge(options)
   name = options.fetch(:name)
   date = Date.parse(options.fetch(:date)) 
+  course_name = options.fetch(:course_name)
+  course_desc = options.fetch(:course_desc)
   output = "pdf/#{name}-#{date}.pdf"
   Certificate.where(student_name: name).destroy_all
   cert = Certificate.create(student_name: name,
                             generated_at: date,
-                            course_name: 'AV102 ESaaS: Managing Distributed Teams',
-                            course_desc: 'AV102 prepares you to be a Teaching Assistant (TA) for the Engineering Software as a Service CS169 MOOC.')
+                            course_name: @course_name,
+                            course_desc: @course_desc)
   File.delete(output) if File.exist?(output)
   Prawn::Document.generate("pdf/#{name}-#{date}.pdf",
                            :page_size => 'A4',
@@ -67,7 +71,7 @@ def send_mail(name, email, file)
     body     File.read('data/body.txt')
     add_file :filename => file, :mime_type => 'application/x-pdf', :content => File.read(file)
   end
- mail.deliver
+ #mail.deliver
 end
 
 
