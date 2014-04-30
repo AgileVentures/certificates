@@ -9,12 +9,14 @@ require 'rspec'
 require 'capybara'
 require 'capybara/rspec'
 require 'rack/test'
+require 'factory_girl'
 require_relative '../app'
 
 set :views => File.join(File.dirname(__FILE__), "..", "views")
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods 
+  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryGirl
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
@@ -30,9 +32,10 @@ RSpec.configure do |config|
   config.include Capybara::DSL 
 end
 
-Capybara.app = Sinatra::Application.new
 FactoryGirl.definition_file_paths = %w{./spec/factories}
 FactoryGirl.find_definitions
+
+Capybara.app = Sinatra::Application.new
 
 Capybara.register_driver :rack_test do |app|
   Capybara::RackTest::Driver.new(app, :headers =>  { 'User-Agent' => 'Capybara' })

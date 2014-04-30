@@ -4,7 +4,7 @@ require 'spec_helper.rb'
 
   describe Certificate do
     before (:each) do
-      @certificate = {student_name: 'Thomas',
+      @certificate = {
                               generated_at: Date.today,
                               course_name: 'My course',
                               course_desc: 'My course description'}

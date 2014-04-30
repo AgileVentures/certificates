@@ -3,7 +3,7 @@ class Certificate < ActiveRecord::Base
   
   validates :course_name, presence: true
   validates :generated_at, presence: true
-  validates :student_name, presence: true, uniqueness: true
+  validates :student_name, presence: true, allow_blank: true, uniqueness: true
 
   private
 
