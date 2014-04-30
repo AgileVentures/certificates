@@ -4,8 +4,12 @@ require 'spec_helper.rb'
 
   describe Certificate do
     before (:each) do
-      #@certificate = create(:certificate)
+      @certificate = FactoryGirl.build(:certificate)
     end
+    
+    it 'should respond to set_identifier' do
+       Certificate.new(attributes_for(:certificate)).should respond_to :set_identifier
+     end
     
     describe "validations" do
       context 'valid attributes' do

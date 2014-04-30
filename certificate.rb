@@ -9,7 +9,7 @@ class Certificate < ActiveRecord::Base
   validates :generated_at, allow_blank: false, presence: true
   validates :student_name, presence: true, allow_blank: false
 
-  private
+  #private
 
   def set_identifier
     self.identifier = Digest::SHA256.hexdigest("#{student_name} - #{course_name} - #{generated_at}")
