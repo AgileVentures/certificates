@@ -13,8 +13,6 @@ require 'factory_girl'
 require 'database_cleaner'
 require_relative '../app'
 
-
-
 set :views => File.join(File.dirname(__FILE__), "..", "views")
 
 RSpec.configure do |config|

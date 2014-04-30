@@ -48,7 +48,7 @@ require 'spec_helper.rb'
         end
         
         it 'should NOT be valid with a badly formatted date' do
-          build(:certificate, :generated_at => '140101').should_not be_valid
+          build(:certificate, :generated_at => "41/31/14").should_not be_valid
         end
       end
     end
