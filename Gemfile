@@ -16,6 +16,7 @@ gem 'mail'
 group :development, :test do
   gem 'debugger'
   gem 'factory_girl'
+  gem 'database_cleaner'
 end
 
 group :test do

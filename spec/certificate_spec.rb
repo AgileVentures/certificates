@@ -4,19 +4,16 @@ require 'spec_helper.rb'
 
   describe Certificate do
     before (:each) do
-      @certificate = {
-                              generated_at: Date.today,
-                              course_name: 'My course',
-                              course_desc: 'My course description'}
-  
+      #@certificate = create(:certificate)
     end
     
     describe "validations" do
-      it "should require a name" do
-        Certificate.new().should_not be_valid
-        Certificate.new(@certificate, :student_name => '').should_not be_valid
-        debugger
-        Certificate.new(@certificate, :student_name => "Thomas").should be_valid
+      it 'should NOT be valid without a name' do
+        build(:certificate, :student_name => '').should_not be_valid
+      end
+      
+      it "should be valid with a name" do
+        create(:certificate, :student_name => "Thomas").should be_valid
       end
     end
   end

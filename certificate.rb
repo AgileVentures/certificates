@@ -1,9 +1,9 @@
 class Certificate < ActiveRecord::Base
   before_create :set_identifier
   
-  validates :course_name, presence: true
-  validates :generated_at, presence: true
-  validates :student_name, presence: true, allow_blank: true, uniqueness: true
+  validates :course_name, allow_blank: false, presence: true
+  validates :generated_at, allow_blank: false, presence: true
+  validates :student_name, presence: true, allow_blank: false
 
   private
 

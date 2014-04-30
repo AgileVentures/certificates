@@ -10,7 +10,10 @@ require 'capybara'
 require 'capybara/rspec'
 require 'rack/test'
 require 'factory_girl'
+require 'database_cleaner'
 require_relative '../app'
+
+
 
 set :views => File.join(File.dirname(__FILE__), "..", "views")
 
@@ -30,11 +33,25 @@ RSpec.configure do |config|
   # this should give us Rack test methods
   #config.include Rack::Test::Methods
   config.include Capybara::DSL 
+  
+  config.before(:suite) do
+     DatabaseCleaner.strategy = :transaction
+     DatabaseCleaner.clean_with(:truncation)
+   end
+
+   config.before(:each) do
+     DatabaseCleaner.start
+   end
+
+   config.after(:each) do
+     DatabaseCleaner.clean
+   end
 end
 
 FactoryGirl.definition_file_paths = %w{./spec/factories}
 FactoryGirl.find_definitions
-
+DatabaseCleaner.strategy = :truncation
+ActiveRecord::Base.logger.level = 1
 Capybara.app = Sinatra::Application.new
 
 Capybara.register_driver :rack_test do |app|
