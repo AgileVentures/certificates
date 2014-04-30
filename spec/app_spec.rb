@@ -11,15 +11,20 @@ end
 
 describe 'GET /verify/:hash' do
   before (:each) do
-    #TODO: Stub out certificates
+    @certificate = FactoryGirl.build(:certificate)
+    @hash = Digest::SHA256.hexdigest("#{@certificate.student_name} - #{@certificate.course_name} - #{@certificate.generated_at}")
+    FactoryGirl.create(:certificate, :identifier => @hash)
+    #d913f23de5fec32d7d6a836f20f07940a7ae9c883e6512fd33c4475bb0276634
   end
-  
+    
  it 'should render valid.erb in hash is valid' do
-   pending
+   visit '/verify/d913f23de5fec32d7d6a836f20f07940a7ae9c883e6512fd33c4475bb0276634'
+   page.should have_text 'valid'
  end
  
  it 'should render invalid.erb in hash is invalid' do
-   pending
+   visit '/verify/12fd33c4475bb0276634'
+   page.should have_text 'invalid'
  end
    
 end
