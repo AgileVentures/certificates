@@ -5,6 +5,7 @@ require 'capybara/rspec'
 require 'rack/test'
 require 'factory_girl'
 require 'database_cleaner'
+require 'pdf/inspector'
 require_relative '../app'
 
 set :views => File.join(File.dirname(__FILE__), "..", "views")

@@ -25,4 +25,5 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
+  gem 'pdf-inspector', :require => "pdf/inspector"
 end

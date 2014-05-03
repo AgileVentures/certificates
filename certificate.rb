@@ -3,7 +3,7 @@ require './date_validator.rb'
 class Certificate < ActiveRecord::Base
   before_create :set_identifier
   
-  validates_with DateValidator
+  #validates_with DateValidator
   
   validates :course_name, allow_blank: false, presence: true
   validates :generated_at, allow_blank: false, presence: true

@@ -22,12 +22,12 @@ describe 'GET /verify/:hash' do
     
     it 'should render valid.erb in hash is valid' do
       visit '/verify/d913f23de5fec32d7d6a836f20f07940a7ae9c883e6512fd33c4475bb0276634'
-      page.should have_text 'valid'
+      expect(page).to have_content 'valid'
     end
  
     it 'should render invalid.erb in hash is invalid' do
       visit '/verify/12fd33c4475bb0276634'
-      page.should have_text 'invalid'
+      expect(page).to have_content 'invalid'
     end   
   end
 end
