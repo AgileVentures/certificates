@@ -2,12 +2,15 @@ require_relative '../av_certs.rb'
 require 'spec_helper.rb' 
 
 describe 'write_to_cert' do	
-	it "should assign a name to name" do
-	  pending
+  before(:each) do
+    write_to_cert(name: 'Thomas', date: Date.today.to_s, course_name: 'Test Course', course_desc: 'Test Description' ) 
+  end
+	it "should assign a standard @username to :name" do
+    expect(write_to_cert(:name)).to be_include("Thomas")  
 	end
   
-	it "should assign a date to date" do
-	  pending
+	it "should assign a date to :date" do
+    expect(write_to_cert(:date)).to be_include(Date.today.to_s) 
 	end
 end
 
@@ -20,7 +23,8 @@ describe "Testing Prawn" do
         @text_analysis = PDF::Inspector::Text.analyze(@rendered_pdf)
         #puts "created #{File.basename(@rendered_pdf)}"
       end
-           
+      
+     
       it "should have 'Thomas' as content" do        
        expect(@text_analysis.strings).to be_include("Thomas")                          
       end
@@ -30,7 +34,7 @@ describe "Testing Prawn" do
       end
       
       after(:each) do
-        FileUtils.rm_rf "#{File.basename(@rendered_pdf)}"
+        FileUtils.rm_rf "pdf/Thomas-#{@date}.pdf"
         #puts "deleted #{File.basename(@rendered_pdf)}"
       end
         
