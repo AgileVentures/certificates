@@ -4,8 +4,8 @@ require 'sinatra/activerecord'
 require './certificate.rb'
 
 configure do
-	enable :sessions
-	enable :method_override
+  enable :sessions
+  enable :method_override
 end
 
 get '/' do

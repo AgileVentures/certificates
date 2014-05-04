@@ -6,6 +6,7 @@ require 'rack/test'
 require 'factory_girl'
 require 'database_cleaner'
 require 'pdf/inspector'
+require 'mail'
 require_relative '../app'
 
 set :views => File.join(File.dirname(__FILE__), "..", "views")
@@ -20,20 +21,20 @@ RSpec.configure do |config|
 
   # this should give us Rack test methods
   #config.include Rack::Test::Methods
-  config.include Capybara::DSL 
-  
+  config.include Capybara::DSL
+
   config.before(:suite) do
-     DatabaseCleaner.strategy = :transaction
-     DatabaseCleaner.clean_with(:truncation)
-   end
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
-   config.before(:each) do
-     DatabaseCleaner.start
-   end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
 
-   config.after(:each) do
-     DatabaseCleaner.clean
-   end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
 
 FactoryGirl.definition_file_paths = %w{./spec/factories}
@@ -43,9 +44,10 @@ ActiveRecord::Base.logger.level = 2
 Capybara.app = Sinatra::Application.new
 
 Capybara.register_driver :rack_test do |app|
-  Capybara::RackTest::Driver.new(app, :headers =>  { 'User-Agent' => 'Capybara' })
+  Capybara::RackTest::Driver.new(app, :headers => {'User-Agent' => 'Capybara'})
 end
 
 def app
-	Sinatra::Application.new
+  Sinatra::Application.new
 end
+
