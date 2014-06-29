@@ -71,7 +71,6 @@ def send_mail(name, email, file)
 end
 
 def save_certificate(name, date, course_name, course_desc)
-  Certificate.where(student_name: name).destroy_all
   @cert = Certificate.create(student_name: name,
                             generated_at: date,
                             course_name: course_name,
