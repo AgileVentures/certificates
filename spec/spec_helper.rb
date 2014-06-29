@@ -9,9 +9,13 @@ require 'rspec'
 require 'capybara'
 require 'capybara/rspec'
 require 'rack/test'
+require 'database_cleaner'
 require_relative '../app'
 
 set :views => File.join(File.dirname(__FILE__), "..", "views")
+
+ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+ActiveRecord::Base.logger.level = 1
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
@@ -27,6 +31,20 @@ RSpec.configure do |config|
   # this should give us Rack test methods
   #config.include Rack::Test::Methods
   config.include Capybara::DSL 
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
 end
 
 Capybara.app = Sinatra::Application.new
