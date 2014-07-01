@@ -63,7 +63,7 @@ def send_mail(name, email, file)
   mail = Mail.new do
     from     'AgileVentures <info@agileventures.org>'
     to       "#{name} <#{email}>"
-    subject  'AV-102 Certificate'
+    subject  'AV-102 Certificate Level 2'
     body     File.read('data/body.txt')
     add_file filename: file, mime_type: 'application/x-pdf', content: File.read(file)
   end
