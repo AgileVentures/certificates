@@ -14,7 +14,7 @@ require './certificate'
 @username = 'No Name'
 @bg_image = File.join(File.dirname(__FILE__), 'templates/AV102-certificate-2.jpg')
 @course_name = 'AV102 ESaaS: Managing Distributed Teams - Level 2'
-@course_desc = 'AV102 prepares you to be a Teaching Assistant (TA) for the Engineering Software as a Service CS169 MOOC.'
+@course_desc = 'Level 2 is awarded for providing regular weekly Teaching Assistant Service to the Engineering Software as a Service CS169 MOOC.'
 
 
 def write_to_cert(options = {})
@@ -67,7 +67,7 @@ def send_mail(name, email, file)
     body     File.read('data/body.txt')
     add_file filename: file, mime_type: 'application/x-pdf', content: File.read(file)
   end
- #mail.deliver
+  mail.deliver
 end
 
 def save_certificate(name, date, course_name, course_desc)
