@@ -12,8 +12,8 @@ require './certificate'
 
 
 @username = 'No Name'
-@bg_image = File.join(File.dirname(__FILE__), 'templates/AV102-certificate300.jpg')
-@course_name = 'AV102 ESaaS: Managing Distributed Teams'
+@bg_image = File.join(File.dirname(__FILE__), 'templates/AV102-certificate-2.jpg')
+@course_name = 'AV102 ESaaS: Managing Distributed Teams - Level 2'
 @course_desc = 'AV102 prepares you to be a Teaching Assistant (TA) for the Engineering Software as a Service CS169 MOOC.'
 
 
