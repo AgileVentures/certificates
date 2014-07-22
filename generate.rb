@@ -10,7 +10,7 @@ require 'colorize'
 require 'av_certs.rb'
 
 def generate
-  csv_text = File.read('data/level2.csv')
+  csv_text = File.read('data/level2-addendum.csv')
   csv = CSV.parse(csv_text, :headers => true)
   csv.each do |row|
     students = row.to_hash
