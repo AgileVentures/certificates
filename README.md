@@ -18,6 +18,7 @@ AV Course Certificates
 You can use this tool from `irb` or from the command line. `Mail` needs to be configured with your smtp server and credentials.
 
 #### Command line
+(note from heroku use `heroku run bash`)
 `ruby -r "./av_certs.rb" -e "write_to_cert(name: 'YOUR NAME', date: '16th March, 2014')"` <= `name:` & `date:` are optional but hey, you do want the certificate to belong to somebody right?
 
 To parse data from a csv file we need to place the file with student names in `data`-folder and call `ruby -r "./generate.rb" -e "generate"`
