@@ -10,7 +10,7 @@ require 'colorize'
 require 'av_certs.rb'
 
 def generate(options: {})
-  options.fetch(:file) ? file = options.fetch(:file) : 'test_data'
+  options.fetch(:file) ? file = options.fetch(:file) : 'av102fall'
   csv_text = File.read("data/#{file}.csv")
   csv = CSV.parse(csv_text, :headers => true)
   csv.each do |row|
