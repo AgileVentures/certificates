@@ -12,9 +12,11 @@ require './certificate'
 
 
 @username = 'No Name'
-@bg_image = File.join(File.dirname(__FILE__), 'templates/AV102-certificate-3.jpg')
-@course_name = 'AV102 ESaaS: Managing Distributed Teams - Level 3'
-@course_desc = 'Level 3 is awarded for providing regular weekly Teaching Assistant Service to the Engineering Software as a Service CS169 MOOC, Part 2.'
+@bg_image = File.join(File.dirname(__FILE__), 'templates/AV102-certificate300.jpg')
+@course_name = 'AV102 ESaaS: Managing Distributed Teams - Level 1'
+@course_desc = 'AV102 prepares you to be a Teaching Assistant (TA) for the Engineering Software as a Service CS169 MOOC.'
+
+#@course_desc = 'Level 3 is awarded for providing regular weekly Teaching Assistant Service to the Engineering Software as a Service CS169 MOOC, Part 2.'
 
 
 def write_to_cert(options = {})
@@ -63,7 +65,7 @@ def send_mail(name, email, file)
   mail = Mail.new do
     from     'AgileVentures <info@agileventures.org>'
     to       "#{name} <#{email}>"
-    subject  'AV-102 Certificate Level 3'
+    subject  'AV-102 Certificate Level 1'
     body     File.read('data/body.txt')
     add_file filename: file, mime_type: 'application/x-pdf', content: File.read(file)
   end

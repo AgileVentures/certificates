@@ -9,8 +9,10 @@ require 'mail'
 require 'colorize'
 require 'av_certs.rb'
 
-def generate
-  csv_text = File.read('data/level3.csv')
+def generate(options: {})
+  #options.fetch(:file) ? file = options.fetch(:file) : 'av102fall'
+  file = 'av102fall'
+  csv_text = File.read("data/#{file}.csv")
   csv = CSV.parse(csv_text, :headers => true)
   csv.each do |row|
     students = row.to_hash
