@@ -38,5 +38,5 @@ build/
 /.idea/
 
 # Ignore datafile
-/data/data.csv
+/data/*.csv
 
